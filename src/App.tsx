@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { School as Pool, Clock, PhoneCall, CheckCircle2, Droplets, Phone, ClipboardCheck, Calendar, Sparkles, Palette, TreePine, FlaskRound as Flask, HeartHandshake } from 'lucide-react';
+import { School as Pool, Clock, PhoneCall, CheckCircle2, Droplets, Phone, ClipboardCheck, Calendar, Sparkles, Palette, TreePine, FlaskRound as Flask, HeartHandshake, Globe, Award, MessageCircle } from 'lucide-react';
 
 function App() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const testimonials = [
     {
       quote: "Pool & Spa Medics has given me complete peace of mind. Their attention to detail and commitment to excellence is unmatched in the industry.",
@@ -27,21 +28,152 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
+      {/* Header/Navigation Bar */}
+      <header className="absolute top-0 left-0 right-0 z-10">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            {/* Logo */}
+            <div className="flex items-center">
+              <div className="text-white font-bold text-xl flex items-center">
+                <svg className="w-8 h-8 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z" fill="#ffffff"/>
+                  <path d="M20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#ffffff"/>
+                  <path d="M2 22h20" stroke="#ffffff" strokeWidth="2" strokeLinecap="round"/>
+                  <path d="M4 18c1.5-1.5 3-3 6-3s4.5 1.5 6 3 3 3 6 3" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                The Pool And Spa Medics Inc.
+              </div>
+            </div>
+            
+            {/* Main Navigation */}
+            <nav>
+              <ul className="flex space-x-8">
+                <li><a href="#about" className="text-white hover:text-blue-200 transition-colors">About</a></li>
+                <li><a href="#gallery" className="text-white hover:text-blue-200 transition-colors">Photo Gallery</a></li>
+                <li><a href="#services" className="text-white hover:text-blue-200 transition-colors">Services</a></li>
+                <li><a href="#portfolio" className="text-white hover:text-blue-200 transition-colors">Portfolio</a></li>
+                <li><a href="#contact" className="text-white hover:text-blue-200 transition-colors">Contact</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </header>
+
       {/* Hero Section */}
       <div 
-        className="relative h-[600px] bg-cover bg-center"
+        className="relative h-[700px] bg-cover bg-center"
         style={{
           backgroundImage: 'url("https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&q=80&w=2070")',
         }}
       >
-        <div className="absolute inset-0 bg-blue-900/70">
-          <div className="container mx-auto px-6 h-full flex items-center">
-            <div className="max-w-2xl text-white">
-              <h1 className="text-5xl font-bold mb-6">Pool & Spa Medics</h1>
-              <p className="text-xl mb-8">Professional pool and spa maintenance services to keep your water pristine and equipment running smoothly.</p>
+        <div className="absolute inset-0 bg-blue-900/60">
+          <div className="container mx-auto px-6 h-full flex flex-col justify-center">
+            <div className="max-w-2xl text-white pt-16">
+              <h1 className="text-6xl font-bold mb-6">Pool & Spa Medics</h1>
+              <p className="text-xl mb-10">Professional pool and spa maintenance services to keep your water pristine and equipment running smoothly.</p>
+              <div className="flex space-x-4">
+                <button className="bg-white text-blue-900 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                  SCHEDULE A CALL
+                </button>
+                <button className="bg-white text-blue-900 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+                  REQUEST A QUOTE
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          {/* Feature Badges Section */}
+          <div className="absolute bottom-0 left-0 right-0 container mx-auto px-6 pb-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-blue-600 bg-opacity-90 rounded-lg p-6 flex items-center">
+                <div className="bg-white rounded-full p-3 mr-4">
+                  <Award className="w-6 h-6 text-blue-600" />
+                </div>
+                <p className="text-white font-medium">Certified Pool Operators with Over 35 Years of Experience</p>
+              </div>
+              <div className="bg-blue-600 bg-opacity-90 rounded-lg p-6 flex items-center">
+                <div className="bg-white rounded-full p-3 mr-4">
+                  <Globe className="w-6 h-6 text-blue-600" />
+                </div>
+                <p className="text-white font-medium">Locally Owned and Operated</p>
+              </div>
+              <div className="bg-blue-600 bg-opacity-90 rounded-lg p-6 flex items-center">
+                <div className="bg-white rounded-full p-3 mr-4">
+                  <CheckCircle2 className="w-6 h-6 text-blue-600" />
+                </div>
+                <p className="text-white font-medium">BBB Accreditation & IPSSA Water Chemistry Certified</p>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Live Chat Elements */}
+      <div className="fixed bottom-6 right-6 z-50">
+        {isChatOpen ? (
+          <div className="bg-white rounded-lg shadow-xl w-80 overflow-hidden">
+            <div className="bg-blue-600 p-4 flex justify-between items-center">
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full bg-white overflow-hidden mr-3">
+                  <img 
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200" 
+                    alt="Support Agent"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <span className="text-white font-medium">Pool & Spa Support</span>
+              </div>
+              <button 
+                onClick={() => setIsChatOpen(false)}
+                className="text-white hover:text-blue-200"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="p-4 h-64 bg-gray-50">
+              <div className="bg-blue-100 rounded-lg p-3 mb-3 max-w-[80%]">
+                <p className="text-sm text-blue-900">Hi there, have a question? Text us here.</p>
+              </div>
+              {/* Chat messages would go here */}
+            </div>
+            <div className="p-4 border-t">
+              <div className="flex">
+                <input 
+                  type="text" 
+                  placeholder="Type your message..." 
+                  className="flex-1 border rounded-l-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <button className="bg-blue-600 text-white px-4 py-2 rounded-r-lg">
+                  Send
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col items-end space-y-3">
+            <button 
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center shadow-lg"
+            >
+              <MessageCircle className="w-5 h-5 mr-2" />
+              Text us
+            </button>
+            <button 
+              onClick={() => setIsChatOpen(true)}
+              className="bg-white rounded-full w-16 h-16 flex items-center justify-center shadow-lg border-2 border-blue-600"
+            >
+              <div className="relative">
+                <div className="w-12 h-12 rounded-full overflow-hidden">
+                  <img 
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200" 
+                    alt="Support Agent"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
+              </div>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Why Trust Us Section */}
@@ -77,6 +209,93 @@ function App() {
                 <div className="w-2 h-2 rounded-full bg-blue-600"></div>
                 <div className="w-2 h-2 rounded-full bg-gray-300"></div>
                 <div className="w-2 h-2 rounded-full bg-gray-300"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Community Section */}
+      <div className="bg-gray-50 py-20">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left side - User Profiles */}
+            <div className="space-y-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Join thousands of satisfied pool and spa owners</h2>
+              
+              <div className="grid grid-cols-2 gap-6">
+                {/* User Profile 1 */}
+                <div className="flex flex-col items-center">
+                  <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg mb-3">
+                    <img 
+                      src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200" 
+                      alt="John profile" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h3 className="font-semibold text-gray-800">John</h3>
+                  <p className="text-blue-600 text-sm">@PoolOwner</p>
+                </div>
+                
+                {/* User Profile 2 */}
+                <div className="flex flex-col items-center">
+                  <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg mb-3">
+                    <img 
+                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200" 
+                      alt="Mike profile" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h3 className="font-semibold text-gray-800">Mike</h3>
+                  <p className="text-blue-600 text-sm">@DesignEnthusiast</p>
+                </div>
+                
+                {/* User Profile 3 */}
+                <div className="flex flex-col items-center">
+                  <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg mb-3">
+                    <img 
+                      src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=200" 
+                      alt="Sarah profile" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h3 className="font-semibold text-gray-800">Sarah</h3>
+                  <p className="text-blue-600 text-sm">@SpaLover</p>
+                </div>
+                
+                {/* User Profile 4 */}
+                <div className="flex flex-col items-center">
+                  <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white shadow-lg mb-3">
+                    <img 
+                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200" 
+                      alt="Emily profile" 
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <h3 className="font-semibold text-gray-800">Emily</h3>
+                  <p className="text-blue-600 text-sm">@WellnessGuru</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Right side - Feature Image and Content */}
+            <div className="space-y-6">
+              <div className="rounded-2xl overflow-hidden shadow-xl">
+                <img 
+                  src="https://images.unsplash.com/photo-1572331165267-854da2b10ccc?auto=format&fit=crop&q=80&w=2070" 
+                  alt="Luxury indoor pool and spa" 
+                  className="w-full h-[400px] object-cover"
+                />
+              </div>
+              
+              <div className="space-y-4 pt-4">
+                <h3 className="text-2xl font-bold text-gray-900">More than just services</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  We provide a complete experience, ensuring your pool and spa are always in perfect condition.
+                </p>
+                <button className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+                  Join Our Community
+                </button>
               </div>
             </div>
           </div>
@@ -262,33 +481,140 @@ function App() {
         </div>
       </div>
 
-      {/* Contact Section */}
-      <div className="bg-blue-900 text-white py-16">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl font-bold mb-8">Ready to Get Started?</h2>
-          <p className="text-xl mb-8">Contact us today for a free consultation</p>
-          <div className="flex justify-center gap-4">
-            <button className="bg-white text-blue-900 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition duration-300">
-              Call Now
-            </button>
-            <button className="border-2 border-white px-8 py-3 rounded-full font-semibold hover:bg-white/10 transition duration-300">
-              Email Us
-            </button>
+      {/* Footer - AquaRama Style */}
+      <footer className="bg-gray-900 text-white py-16">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start mb-12">
+            {/* Left Column - CTA */}
+            <div className="text-center md:text-left">
+              <h3 className="text-xl font-serif mb-6">Metro Atlanta families deserve to enjoy their pools.</h3>
+              <button className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors uppercase">
+                Schedule a Call
+              </button>
+            </div>
+            
+            {/* Center Column - Logo and Awards */}
+            <div className="flex flex-col items-center space-y-6">
+              {/* Logo */}
+              <div className="flex items-center">
+                <div className="mr-3">
+                  <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 18c1.5-1.5 3-3 6-3s4.5 1.5 6 3 3 3 6 3" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M3 14c1.5-1.5 3-3 6-3s4.5 1.5 6 3 3 3 6 3" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M2 10c1.5-1.5 3-3 6-3s4.5 1.5 6 3 3 3 6 3" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-serif text-white font-bold">Pool & Spa Medics</h3>
+                  <p className="text-sm text-gray-300">Professional Pool & Spa Services</p>
+                </div>
+              </div>
+              
+              {/* Awards */}
+              <div className="flex flex-wrap gap-6 justify-center">
+                <div className="w-24 h-24 relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full shadow-lg"></div>
+                  <div className="absolute inset-2 bg-white rounded-full flex flex-col items-center justify-center p-2 text-center">
+                    <span className="text-yellow-600 font-bold text-xs">BEST OF</span>
+                    <span className="text-gray-800 font-bold text-sm">COBB</span>
+                    <span className="text-gray-800 font-bold text-xs">WINNER</span>
+                    <span className="text-gray-800 font-bold text-xs">5 YEARS</span>
+                    <span className="text-gray-600 text-[10px]">2019-2023</span>
+                  </div>
+                </div>
+                <div className="w-24 h-24 relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-teal-500 to-teal-700 rounded-full shadow-lg"></div>
+                  <div className="absolute inset-2 bg-white rounded-full flex flex-col items-center justify-center p-2 text-center">
+                    <span className="text-teal-600 font-bold text-xs">BEST OF</span>
+                    <span className="text-gray-800 font-bold text-sm">COBB</span>
+                    <span className="text-gray-800 font-bold text-xs">2024</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            {/* Right Column - Contact Info */}
+            <div className="text-center md:text-right">
+              <p className="text-gray-300 mb-4">123 Pool Avenue, Miami, FL 33101</p>
+              <p className="text-gray-300 mb-4">
+                <span className="font-medium">Email:</span> info@poolspamedics.com
+              </p>
+              <p className="text-gray-300 mb-6">
+                <span className="font-medium">Phone:</span> (555) 123-4567
+              </p>
+              
+              {/* Social Media */}
+              <div className="space-y-2">
+                <h4 className="text-sm font-semibold text-gray-400 uppercase">Dive into Social Media</h4>
+                <div className="flex space-x-4 justify-center md:justify-end">
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path fillRule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clipRule="evenodd" />
+                    </svg>
+                  </a>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" />
+                    </svg>
+                  </a>
+                  <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M9.04 21.54c.96.29 1.93.46 2.96.46a10 10 0 0010-10A10 10 0 0012 2 10 10 0 002 12c0 4.25 2.67 7.9 6.44 9.34-.04-.38-.12-1.05-.03-1.56l.84-3.65s-.2-.43-.2-1.06c0-.98.57-1.71 1.28-1.71.6 0 .9.45.9.99 0 .6-.39 1.5-.58 2.34-.17.74.35 1.33 1.03 1.33 1.23 0 2.08-1.3 2.08-3.17 0-1.66-1.12-2.82-2.73-2.82a2.86 2.86 0 00-2.96 2.9c0 .57.18 1.18.4 1.48.05.06.05.12.03.17l-.14.59c-.04.17-.15.22-.34.13-.94-.44-1.53-1.82-1.53-2.93 0-2.2 1.56-4.22 4.54-4.22 2.38 0 4.23 1.7 4.23 4.07 0 2.42-1.52 4.37-3.64 4.37-.71 0-1.37-.37-1.6-.8l-.43 1.66c-.16.6-.59 1.35-.88 1.81z" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Copyright */}
+          <div className="pt-8 border-t border-gray-800 text-center">
+            <p className="text-gray-500 text-sm">© 2025 Pool & Spa Medics. All rights reserved. | <a href="#" className="hover:text-white transition-colors">Privacy Policy</a> | <a href="#" className="hover:text-white transition-colors">Accessibility Statement</a></p>
           </div>
         </div>
-      </div>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-8">
-        <div className="container mx-auto px-6 text-center">
-          <p>© 2024 Pool & Spa Medics. All rights reserved.</p>
+        
+        {/* Chat Widget */}
+        <div className="fixed bottom-6 right-6 z-50">
+          <div className="bg-white rounded-lg shadow-xl w-80 overflow-hidden">
+            <div className="bg-blue-600 p-4 flex justify-between items-center">
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-full bg-white overflow-hidden mr-3">
+                  <img 
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200" 
+                    alt="Support Agent"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <span className="text-white font-medium">Pool & Spa Support</span>
+              </div>
+              <button className="text-white hover:text-blue-200">
+                ✕
+              </button>
+            </div>
+            <div className="p-4 bg-gray-50">
+              <div className="bg-blue-100 rounded-lg p-3 mb-3 max-w-[80%]">
+                <p className="text-sm text-blue-900">Hi there, have a question? Text us here.</p>
+              </div>
+            </div>
+            <div className="p-4 border-t flex">
+              <button className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center shadow-lg mr-2">
+                <MessageCircle className="w-5 h-5 mr-2" />
+                Text us
+              </button>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
   );
 }
 
-function TestimonialCard({ backgroundImage, profileImage, name, handle }) {
+function TestimonialCard({ backgroundImage, profileImage, name, handle }: { 
+  backgroundImage: string; 
+  profileImage: string; 
+  name: string; 
+  handle: string; 
+}) {
   return (
     <div className="relative rounded-xl overflow-hidden shadow-lg group">
       {/* Background Image */}
@@ -318,7 +644,11 @@ function TestimonialCard({ backgroundImage, profileImage, name, handle }) {
   );
 }
 
-function ExpertiseCard({ icon, title, description }) {
+function ExpertiseCard({ icon, title, description }: { 
+  icon: React.ReactNode; 
+  title: string; 
+  description: string; 
+}) {
   return (
     <div className="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
       <div className="flex justify-center items-center mb-6 h-16 w-16 mx-auto bg-blue-50 rounded-full">
@@ -330,7 +660,11 @@ function ExpertiseCard({ icon, title, description }) {
   );
 }
 
-function PortfolioCard({ image, title, category }) {
+function PortfolioCard({ image, title, category }: { 
+  image: string; 
+  title: string; 
+  category: string; 
+}) {
   return (
     <div className="relative rounded-xl overflow-hidden shadow-lg group">
       <div className="aspect-[4/3]">
@@ -350,7 +684,12 @@ function PortfolioCard({ image, title, category }) {
   );
 }
 
-function ProcessCard({ number, icon, title, description }) {
+function ProcessCard({ number, icon, title, description }: { 
+  number: string; 
+  icon: React.ReactNode; 
+  title: string; 
+  description: string; 
+}) {
   return (
     <div className="relative bg-white rounded-full aspect-square p-8 shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center group">
       {/* Background Number */}
@@ -372,7 +711,11 @@ function ProcessCard({ number, icon, title, description }) {
   );
 }
 
-function FeatureCard({ icon, title, description }) {
+function FeatureCard({ icon, title, description }: { 
+  icon: React.ReactNode; 
+  title: string; 
+  description: string; 
+}) {
   return (
     <div className="text-center">
       <div className="flex justify-center mb-4">{icon}</div>
