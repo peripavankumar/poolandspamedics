@@ -33,7 +33,7 @@ function App() {
       image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=2069",
       imageAlt: "Professional with certificate",
       title: "The most experienced",
-      description: "AquaRama was founded in 1965. Our household reputation has been established through the decades."
+      description: "The Pools and Spa Medics Inc. was founded in 2006. Our household reputation has been established through the decades."
     },
     {
       image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=2069",
@@ -120,7 +120,7 @@ function App() {
                 <div className="bg-white rounded-full p-3 mr-4">
                   <Award className="w-6 h-6 text-blue-600" />
                 </div>
-                <p className="text-white font-medium">Certified Pool & Spa Operators with Over 10+ Years of Experience</p>
+                <p className="text-white font-medium">Certified Pool & Spa Operators with Over 18 Years of Experience</p>
               </div>
               <div className="bg-blue-600 bg-opacity-90 rounded-lg p-6 flex items-center">
                 <div className="bg-white rounded-full p-3 mr-4">
@@ -563,7 +563,7 @@ function App() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-2xl font-serif text-white font-bold">Pool & Spa Medics</h3>
+                  <h3 className="text-2xl font-serif text-white font-bold">The Pool & Spa Medics Inc.</h3>
                   <p className="text-sm text-gray-300">Professional Pool & Spa Services</p>
                 </div>
               </div>
@@ -573,19 +573,15 @@ function App() {
                 <div className="w-24 h-24 relative">
                   <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full shadow-lg"></div>
                   <div className="absolute inset-2 bg-white rounded-full flex flex-col items-center justify-center p-2 text-center">
-                    <span className="text-yellow-600 font-bold text-xs">BEST OF</span>
-                    <span className="text-gray-800 font-bold text-sm">COBB</span>
-                    <span className="text-gray-800 font-bold text-xs">WINNER</span>
-                    <span className="text-gray-800 font-bold text-xs">5 YEARS</span>
-                    <span className="text-gray-600 text-[10px]">2019-2023</span>
+                    <span className="text-yellow-600 font-bold text-xs">BBB</span>
                   </div>
                 </div>
                 <div className="w-24 h-24 relative">
                   <div className="absolute inset-0 bg-gradient-to-br from-teal-500 to-teal-700 rounded-full shadow-lg"></div>
                   <div className="absolute inset-2 bg-white rounded-full flex flex-col items-center justify-center p-2 text-center">
-                    <span className="text-teal-600 font-bold text-xs">BEST OF</span>
-                    <span className="text-gray-800 font-bold text-sm">COBB</span>
-                    <span className="text-gray-800 font-bold text-xs">2024</span>
+                    <span className="text-teal-600 font-bold text-xs">SUPPORT</span>
+                    <span className="text-gray-800 font-bold text-sm">ARMED</span>
+                    <span className="text-gray-800 font-bold text-xs">FORCES</span>
                   </div>
                 </div>
               </div>
@@ -593,7 +589,7 @@ function App() {
             
             {/* Right Column - Contact Info */}
             <div className="text-center md:text-right">
-              <p className="text-gray-300 mb-4">123 Pool Rd, Mississauga, ON L5B 0B9</p>
+              <p className="text-gray-300 mb-4">9 Habitat Square, Brampton, ON L6S 1X7</p>
               <p className="text-gray-300 mb-4">
                 <span className="font-medium">Email:</span> thepoolandspamedics@yahoo.ca
               </p>
@@ -631,7 +627,7 @@ function App() {
           
           {/* Copyright */}
           <div className="pt-8 border-t border-gray-800 text-center">
-            <p className="text-gray-500 text-sm">© 2025 Pool & Spa Medics. All rights reserved. | <a href="#" className="hover:text-white transition-colors">Privacy Policy</a> | <a href="#" className="hover:text-white transition-colors">Accessibility Statement</a></p>
+            <p className="text-gray-500 text-sm">© 2025 The Pool & Spa Medics Inc. All rights reserved. | <a href="#" className="hover:text-white transition-colors">Privacy Policy</a> | <a href="#" className="hover:text-white transition-colors">Accessibility Statement</a></p>
           </div>
         </div>
         
