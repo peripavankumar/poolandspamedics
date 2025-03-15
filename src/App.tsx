@@ -4,18 +4,19 @@ import { School as Pool, Clock, PhoneCall, CheckCircle2, Droplets, Phone, Clipbo
 function App() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [currentTrustSlide, setCurrentTrustSlide] = useState(0);
   const testimonials = [
     {
-      quote: "Pool & Spa Medics has given me complete peace of mind. Their attention to detail and commitment to excellence is unmatched in the industry.",
-      author: "LENNA CASTAGNA"
+      quote: "The Pool and Spa Medics Inc. have always shown themselves to be honest and professional when dealing with equipment failures, requiring repair or replacement. Thanks Guys.",
+      author: "Sharon Hammond- Wilson Blanchard Management Inc."
     },
     {
-      quote: "The most professional pool service I've ever worked with. Their expertise and customer service are truly exceptional.",
-      author: "BRIAN A."
+      quote: "Your response to our equipment breakdowns have always been first class. Your turn around time getting our facility back up and running was impressive! Thanks, good work !",
+      author: "Cristian Anastasia - Brookfield Residential Services Ltd."
     },
     {
-      quote: "Without a doubt, the best pool company I've ever hired. Their team is knowledgeable, reliable, and always goes above and beyond.",
-      author: "BILL P."
+      quote: "The Medics have proven themselves to be a company that shows integrity and respect when dealing with customers, having the ability to resolve their concerns. Thanks Medics",
+      author: "Lance Farrel - Aquatech Logistics Inc."
     }
   ];
 
@@ -23,6 +24,36 @@ function App() {
     const timer = setInterval(() => {
       setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
     }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Trust section slides data
+  const trustSlides = [
+    {
+      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=2069",
+      imageAlt: "Professional with certificate",
+      title: "The most experienced",
+      description: "AquaRama was founded in 1965. Our household reputation has been established through the decades."
+    },
+    {
+      image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=2069",
+      imageAlt: "Award winning team",
+      title: "Certified professionals",
+      description: "Our team consists of certified professionals with extensive training in pool and spa maintenance."
+    },
+    {
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=2069",
+      imageAlt: "Customer service",
+      title: "Customer satisfaction",
+      description: "We pride ourselves on delivering exceptional service and ensuring complete customer satisfaction."
+    }
+  ];
+
+  // Auto-rotate trust slides
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTrustSlide((prev) => (prev + 1) % trustSlides.length);
+    }, 6000);
     return () => clearInterval(timer);
   }, []);
 
@@ -89,7 +120,7 @@ function App() {
                 <div className="bg-white rounded-full p-3 mr-4">
                   <Award className="w-6 h-6 text-blue-600" />
                 </div>
-                <p className="text-white font-medium">Certified Pool Operators with Over 35 Years of Experience</p>
+                <p className="text-white font-medium">Certified Pool & Spa Operators with Over 10+ Years of Experience</p>
               </div>
               <div className="bg-blue-600 bg-opacity-90 rounded-lg p-6 flex items-center">
                 <div className="bg-white rounded-full p-3 mr-4">
@@ -101,7 +132,7 @@ function App() {
                 <div className="bg-white rounded-full p-3 mr-4">
                   <CheckCircle2 className="w-6 h-6 text-blue-600" />
                 </div>
-                <p className="text-white font-medium">BBB Accreditation & IPSSA Water Chemistry Certified</p>
+                <p className="text-white font-medium">BBB Accreditation & Member of The Pool and Hot Tub Council of Canada</p>
               </div>
             </div>
           </div>
@@ -177,38 +208,60 @@ function App() {
       </div>
 
       {/* Why Trust Us Section */}
-      <div className="bg-white py-20">
+      <div className="bg-gray-50 py-20">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-5 gap-12 items-center">
-            {/* Left side - Image */}
+            {/* Left side - Image (60% width) */}
             <div className="md:col-span-3 relative">
               <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-2xl">
-                <div className="absolute inset-0 bg-blue-900/10 pattern-grid-lg"></div>
-                <img 
-                  src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&q=80&w=2069"
-                  alt="Award winning team"
-                  className="w-full h-full object-cover"
-                />
+                {trustSlides.map((slide, index) => (
+                  <div 
+                    key={index}
+                    className={`absolute inset-0 transition-opacity duration-1000 ${
+                      index === currentTrustSlide ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  >
+                    <img 
+                      src={slide.image}
+                      alt={slide.imageAlt}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Right side - Content */}
-            <div className="md:col-span-2 text-center space-y-8">
+            {/* Right side - Content (40% width) */}
+            <div className="md:col-span-2 space-y-8">
               <div className="space-y-6">
                 <p className="text-blue-900 font-semibold tracking-wider">WHY TRUST US</p>
-                <h2 className="text-4xl font-serif italic text-gray-900">A priority on education</h2>
-                <p className="text-gray-600 leading-relaxed">
-                  With over two decades of experience and continuous education in the latest pool and spa technologies, 
-                  our certified professionals bring unmatched expertise to every service call. We're proud members of 
-                  the Pool & Hot Tub Alliance, committed to maintaining the highest industry standards.
-                </p>
+                {trustSlides.map((slide, index) => (
+                  <div 
+                    key={index}
+                    className={`transition-opacity duration-1000 ${
+                      index === currentTrustSlide ? 'opacity-100' : 'opacity-0 absolute'
+                    }`}
+                  >
+                    <h2 className="text-4xl font-serif text-gray-900">{slide.title}</h2>
+                    <p className="text-gray-600 leading-relaxed mt-4">
+                      {slide.description}
+                    </p>
+                  </div>
+                ))}
               </div>
               
               {/* Pagination dots */}
               <div className="flex justify-center gap-2 pt-8">
-                <div className="w-2 h-2 rounded-full bg-blue-600"></div>
-                <div className="w-2 h-2 rounded-full bg-gray-300"></div>
-                <div className="w-2 h-2 rounded-full bg-gray-300"></div>
+                {trustSlides.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentTrustSlide(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === currentTrustSlide ? 'bg-blue-600 w-4' : 'bg-gray-300'
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -221,7 +274,7 @@ function App() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left side - User Profiles */}
             <div className="space-y-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Join thousands of satisfied pool and spa owners</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">Join our satisfied pool and spa owners</h2>
               
               <div className="grid grid-cols-2 gap-6">
                 {/* User Profile 1 */}
@@ -233,7 +286,7 @@ function App() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <h3 className="font-semibold text-gray-800">John</h3>
+                  <h3 className="font-semibold text-gray-800">Lance</h3>
                   <p className="text-blue-600 text-sm">@PoolOwner</p>
                 </div>
                 
@@ -246,7 +299,7 @@ function App() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <h3 className="font-semibold text-gray-800">Mike</h3>
+                  <h3 className="font-semibold text-gray-800">Sharon</h3>
                   <p className="text-blue-600 text-sm">@DesignEnthusiast</p>
                 </div>
                 
@@ -259,7 +312,7 @@ function App() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <h3 className="font-semibold text-gray-800">Sarah</h3>
+                  <h3 className="font-semibold text-gray-800">Lori</h3>
                   <p className="text-blue-600 text-sm">@SpaLover</p>
                 </div>
                 
@@ -272,7 +325,7 @@ function App() {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <h3 className="font-semibold text-gray-800">Emily</h3>
+                  <h3 className="font-semibold text-gray-800">Stacey</h3>
                   <p className="text-blue-600 text-sm">@WellnessGuru</p>
                 </div>
               </div>
@@ -320,13 +373,13 @@ function App() {
             />
             <ExpertiseCard
               icon={<Sparkles className="w-8 h-8 text-blue-600" />}
-              title="Spa Installation"
-              description="Expert installation of spas and hot tubs with precise attention to detail and functionality"
+              title="Spa Maintenance"
+              description="Expert maintenance of spas and hot tubs with precise attention to detail and functionality"
             />
             <ExpertiseCard
               icon={<Palette className="w-8 h-8 text-blue-600" />}
-              title="Custom Designs"
-              description="Tailored pool and spa designs that perfectly match your vision and space requirements"
+              title="Repairs"
+              description="Expert pool repair and pool equipment repair services for residential and commercial pools"
             />
             <ExpertiseCard
               icon={<Flask className="w-8 h-8 text-blue-600" />}
@@ -335,13 +388,13 @@ function App() {
             />
             <ExpertiseCard
               icon={<TreePine className="w-8 h-8 text-blue-600" />}
-              title="Landscape Integration"
-              description="Seamless integration of pool and spa features with your existing landscape design"
+              title="Inspection"
+              description="Ensure your pool is safe and in top condition with our professional inspection service! We check for leaks, equipment issues, and water balance"
             />
             <ExpertiseCard
               icon={<HeartHandshake className="w-8 h-8 text-blue-600" />}
-              title="Customer Service"
-              description="Dedicated support and maintenance plans tailored to your specific needs"
+              title="Training"
+              description="Dedicated training for pool and spa operators, including legal responsibilities, water chemistry, and facility management"
             />
           </div>
         </div>
@@ -487,9 +540,14 @@ function App() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start mb-12">
             {/* Left Column - CTA */}
             <div className="text-center md:text-left">
-              <h3 className="text-xl font-serif mb-6">Metro Atlanta families deserve to enjoy their pools.</h3>
+              <h3 className="text-xl font-serif mb-6">Families deserve to enjoy their pools.</h3>
               <button className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors uppercase">
                 Schedule a Call
+              </button>
+              <br />
+              <br />
+              <button className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors uppercase">
+                Request a Quote
               </button>
             </div>
             
@@ -535,12 +593,16 @@ function App() {
             
             {/* Right Column - Contact Info */}
             <div className="text-center md:text-right">
-              <p className="text-gray-300 mb-4">123 Pool Avenue, Miami, FL 33101</p>
+              <p className="text-gray-300 mb-4">123 Pool Rd, Mississauga, ON L5B 0B9</p>
               <p className="text-gray-300 mb-4">
-                <span className="font-medium">Email:</span> info@poolspamedics.com
+                <span className="font-medium">Email:</span> thepoolandspamedics@yahoo.ca
               </p>
               <p className="text-gray-300 mb-6">
-                <span className="font-medium">Phone:</span> (555) 123-4567
+                <span className="font-medium">Phone:</span> (416) 821-9043
+                <br />
+                <span className="font-medium">Phone:</span> (647) 292-3447
+                <br />
+                <span className="font-medium">Fax:</span> (905) 789-1145
               </p>
               
               {/* Social Media */}
