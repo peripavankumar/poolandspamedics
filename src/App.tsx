@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { School as Pool, Clock, PhoneCall, CheckCircle2, Droplets, Phone, ClipboardCheck, Calendar, Sparkles, Palette, TreePine, FlaskRound as Flask, HeartHandshake, Globe, Award, MessageCircle } from 'lucide-react';
 
 function App() {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  const [isChatOpen, setIsChatOpen] = useState(false);
-  const [currentTrustSlide, setCurrentTrustSlide] = useState(0);
+  const [currentTestimonial, setCurrentTestimonial] = useState<number>(0);
+  const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
+  const [currentTrustSlide, setCurrentTrustSlide] = useState<number>(0);
   const testimonials = [
     {
       quote: "The Pool and Spa Medics Inc. have always shown themselves to be honest and professional when dealing with equipment failures, requiring repair or replacement. Thanks Guys.",
@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+      setCurrentTestimonial((prev: number) => (prev + 1) % testimonials.length);
     }, 5000);
     return () => clearInterval(timer);
   }, []);
@@ -52,7 +52,7 @@ function App() {
   // Auto-rotate trust slides
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentTrustSlide((prev) => (prev + 1) % trustSlides.length);
+      setCurrentTrustSlide((prev: number) => (prev + 1) % trustSlides.length);
     }, 6000);
     return () => clearInterval(timer);
   }, []);
@@ -67,10 +67,7 @@ function App() {
             <div className="flex items-center">
               <div className="text-white font-bold text-xl flex items-center">
                 <svg className="w-8 h-8 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z" fill="#ffffff"/>
-                  <path d="M20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="#ffffff"/>
-                  <path d="M2 22h20" stroke="#ffffff" strokeWidth="2" strokeLinecap="round"/>
-                  <path d="M4 18c1.5-1.5 3-3 6-3s4.5 1.5 6 3 3 3 6 3" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <image href="/images/logo.jpg" width="24" height="24" />
                 </svg>
                 The Pool And Spa Medics Inc.
               </div>
@@ -569,19 +566,31 @@ function App() {
               </div>
               
               {/* Awards */}
-              <div className="flex flex-wrap gap-6 justify-center">
-                <div className="w-24 h-24 relative">
+              <div className="flex flex-nowrap justify-center space-x-4 overflow-x-auto py-2 w-full">
+                <div className="w-20 h-20 relative flex-shrink-0">
                   <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full shadow-lg"></div>
                   <div className="absolute inset-2 bg-white rounded-full flex flex-col items-center justify-center p-2 text-center">
-                    <span className="text-yellow-600 font-bold text-xs">BBB</span>
+                    <img src="/images/logo1.png" alt="Award badge" className="w-full h-full object-contain" />
                   </div>
                 </div>
-                <div className="w-24 h-24 relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-teal-500 to-teal-700 rounded-full shadow-lg"></div>
-                  <div className="absolute inset-2 bg-white rounded-full flex flex-col items-center justify-center p-2 text-center">
-                    <span className="text-teal-600 font-bold text-xs">SUPPORT</span>
-                    <span className="text-gray-800 font-bold text-sm">ARMED</span>
-                    <span className="text-gray-800 font-bold text-xs">FORCES</span>
+                <div className="w-20 h-20 relative flex-shrink-0">
+                  <div className="absolute inset-0 bg-gradient-to-br from-teal-500 to-yellow-700 rounded-full shadow-lg"></div>
+                  <div className="absolute inset-2 bg-white rounded-full flex items-center justify-center p-2 text-center">
+                    <img 
+                      src="/images/logo2.jpg" 
+                      alt="Award badge" 
+                      className="w-4/5 h-4/5 object-contain rounded-full"
+                    />
+                  </div>
+                </div>
+                <div className="w-20 h-20 relative flex-shrink-0">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-blue-700 rounded-full shadow-lg"></div>
+                  <div className="absolute inset-2 bg-white rounded-full flex items-center justify-center p-2 text-center">
+                    <img 
+                      src="/images/logo3.svg" 
+                      alt="Award badge" 
+                      className="w-4/5 h-4/5 object-contain"
+                    />
                   </div>
                 </div>
               </div>
@@ -628,38 +637,6 @@ function App() {
           {/* Copyright */}
           <div className="pt-8 border-t border-gray-800 text-center">
             <p className="text-gray-500 text-sm">© 2025 The Pool & Spa Medics Inc. All rights reserved. | <a href="#" className="hover:text-white transition-colors">Privacy Policy</a> | <a href="#" className="hover:text-white transition-colors">Accessibility Statement</a></p>
-          </div>
-        </div>
-        
-        {/* Chat Widget */}
-        <div className="fixed bottom-6 right-6 z-50">
-          <div className="bg-white rounded-lg shadow-xl w-80 overflow-hidden">
-            <div className="bg-blue-600 p-4 flex justify-between items-center">
-              <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-white overflow-hidden mr-3">
-                  <img 
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200" 
-                    alt="Support Agent"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <span className="text-white font-medium">Pool & Spa Support</span>
-              </div>
-              <button className="text-white hover:text-blue-200">
-                ✕
-              </button>
-            </div>
-            <div className="p-4 bg-gray-50">
-              <div className="bg-blue-100 rounded-lg p-3 mb-3 max-w-[80%]">
-                <p className="text-sm text-blue-900">Hi there, have a question? Text us here.</p>
-              </div>
-            </div>
-            <div className="p-4 border-t flex">
-              <button className="bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center shadow-lg mr-2">
-                <MessageCircle className="w-5 h-5 mr-2" />
-                Text us
-              </button>
-            </div>
           </div>
         </div>
       </footer>
